@@ -12,6 +12,7 @@ export class GifsService {
   private limit = 10;
   private lastWantedGifs: string[] = [];
   public gifsResults: SearchGifsResponse;
+  public trendingResults: SearchGifsResponse = <SearchGifsResponse>{};
 
 
   constructor(private http: HttpClient) {
@@ -24,7 +25,6 @@ export class GifsService {
   }
 
   searchGifs(query: string, offset = 0, limit = 10): void {
-
 
     if (!this.lastWantedGifs.includes(query)) {
       this.lastWantedGifs.unshift(query);
@@ -43,6 +43,18 @@ export class GifsService {
     this.http.get<SearchGifsResponse>(`${this.apiUrl}/search`, { params: httpParams })
       .subscribe(res => {
         this.gifsResults = res;
+      });
+  }
+  searchTrending(offset = 0, limit = 10): void {
+
+    const httpParams = new HttpParams()
+      .set('api_key', apiKey)
+      .set('limit', limit.toString())
+      .set('offset', offset.toString());
+
+    this.http.get<SearchGifsResponse>(`${this.apiUrl}/trending`, { params: httpParams })
+      .subscribe(res => {
+        this.trendingResults = res;
       });
   }
 }

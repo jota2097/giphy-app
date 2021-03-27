@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { SearchGifsResponse } from '../Model/Interface/gifs.interface';
 import { GifsService } from '../services/gifs.service';
@@ -12,12 +12,19 @@ import { GifsService } from '../services/gifs.service';
 export class ListComponent implements OnInit {
 
   constructor(private gifsService: GifsService) { }
+  @Input() selectedTabIndex: number = 0;
   public limitApiOffset: number = 4990;
 
   ngOnInit(): void {
+    this.gifsService.searchTrending();
   }
+
   get results(): SearchGifsResponse {
     return this.gifsService.gifsResults;
+  }
+
+  get resultsTrending(): SearchGifsResponse {
+    return this.gifsService.trendingResults;
   }
 
   handlePageEvent(event: PageEvent) {
