@@ -1,29 +1,18 @@
-<section *ngIf="selectedTabIndex === 0">
-   
-    <div *ngIf="results.data" class="row">
-        <div class="col">
-            <mat-paginator [length]="results.pagination.total_count" [pageSize]="10" (page)="handlePageEvent($event)">
-            </mat-paginator>
-        </div>
-    </div>
-</section>
-<section *ngIf="selectedTabIndex === 1">
-    <div class="row">
-        <div *ngFor="let trending of resultsTrending.data" class="col-md-4 col-sm-4 animate__animated animate__fadeIn">
-            <div class="card mt-4">
-                <img [src]="trending.images.downsized_medium.url" height="200" [alt]="trending.title" class="card-img-top">
-                <div class="card-body">
-                    <div class="card-text">
-                        {{trending.title}}
-                    </div>
+<div class="row">
+    <div *ngFor="let gif of dataGifs.data" class="col-md-4 col-sm-4 animate__animated animate__fadeIn">
+        <div class="card mt-4">
+            <img [src]="gif.images.downsized_medium.url" height="200" [alt]="gif.title" class="card-img-top">
+            <div class="card-body">
+                <div class="card-text">
+                    {{gif.title}}
                 </div>
             </div>
         </div>
     </div>
-    <div *ngIf="results.data" class="row">
-        <div class="col">
-            <mat-paginator [length]="resultsTrending.pagination.total_count" [pageSize]="10" (page)="handlePageEvent($event)">
-            </mat-paginator>
-        </div>
+</div>
+<div *ngIf="dataGifs.data" class="row">
+    <div class="col">
+        <mat-paginator [length]="dataGifs.pagination.total_count" [pageSize]="10" (page)="handlePageEvent($event)">
+        </mat-paginator>
     </div>
-</section>
+</div>

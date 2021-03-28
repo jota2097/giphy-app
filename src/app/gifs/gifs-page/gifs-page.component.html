@@ -8,7 +8,7 @@
             <div class="col">
                 <app-search></app-search>
                 <hr />
-                <app-list [selectedTabIndex]="selectedTabIndex"></app-list>
+                <app-list [dataGifs]="getSearchResults()" (search)="search($event)"></app-list>
             </div>
         </div>
 
@@ -18,7 +18,15 @@
             <mat-icon>star</mat-icon>
             Trending
         </ng-template>
-        <app-list [selectedTabIndex]="selectedTabIndex"></app-list>
+        <app-list [dataGifs]="getTrendingGifs()" (search)="search($event)"></app-list>
+
     </mat-tab>
-    <mat-tab label="Third">Content 3</mat-tab>
+    <mat-tab>
+        <ng-template mat-tab-label>
+            <mat-icon>smart_toy</mat-icon>
+            Stickers
+        </ng-template>
+        <app-list [dataGifs]="getTrendingStickers()" (search)="search($event)"></app-list>
+
+    </mat-tab>
 </mat-tab-group>
